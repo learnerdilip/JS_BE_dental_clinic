@@ -15,7 +15,10 @@ router.post("/visit", async (req, res, next) => {
       balance: req.body.balance,
       followupDateTime: req.body.followupDateTime,
     });
-    res.send({ message: "The record was created successfully!" });
+    res.send({
+      message: "The record was created successfully!",
+      data: createVisit,
+    });
   } catch {
     (error) => console.error(error);
   }
