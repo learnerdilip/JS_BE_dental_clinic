@@ -4,7 +4,7 @@ const Visit = require("./model");
 
 router.post("/visit", async (req, res, next) => {
   try {
-    console.log("********", req.body);
+    // console.log("********", req.body);
     const createVisit = await Visit.create({
       patient: req.body.patient,
       currentDateTime: req.body.currentDateTime,
@@ -19,6 +19,16 @@ router.post("/visit", async (req, res, next) => {
       message: "The record was created successfully!",
       data: createVisit,
     });
+  } catch {
+    (error) => console.error(error);
+  }
+});
+
+router.get("/patientvisits", async (req, res, next) => {
+  try {
+    const patientVisitList = await Visit.find({ patient: req.query.id });
+    // console.log("**the list of visits**", patientVisitList);
+    res.send(patientVisitList);
   } catch {
     (error) => console.error(error);
   }

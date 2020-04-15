@@ -26,7 +26,7 @@ router.post("/patient", async (req, res, next) => {
 router.get("/patients", async (req, res, next) => {
   try {
     const patientList = await Patient.find();
-    console.log("***the patients list***", patientList);
+    // console.log("***the patients list***", patientList);
     res.send(patientList);
   } catch {
     (error) => console.error(error);
