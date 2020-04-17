@@ -1,11 +1,11 @@
 const { Router } = require("express");
 const router = new Router();
-const Visit = require("./model");
+const Tooth = require("./model");
 
 router.post("/toothwork", async (req, res, next) => {
   try {
     // console.log("********", req.body);
-    const createtoothwork = await Visit.create({
+    const createtoothwork = await Tooth.create({
       patientId: req.body.patientId,
       VisitDate: req.body.VisitDate,
       toothNo: req.body.toothNo,
@@ -29,8 +29,7 @@ router.post("/toothwork", async (req, res, next) => {
 
 router.get("/toothwork", async (req, res, next) => {
   try {
-    const patientVisitList = await Visit.find({ patient: req.query.id });
-    // console.log("**the list of visits**", patientVisitList);
+    const patientVisitList = await Tooth.find({ patientId: req.query.id });
     res.send(patientVisitList);
   } catch {
     (error) => console.error(error);
