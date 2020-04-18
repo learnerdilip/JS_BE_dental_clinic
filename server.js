@@ -7,7 +7,7 @@ const indentRouter = require("./src/indents/router");
 
 const cors = require("cors");
 const app = express();
-const PORT = process.env.PORT || 4000;
+const port = process.env.PORT || 4000;
 
 app.use(cors());
 app.use(express.json());
@@ -21,4 +21,4 @@ mongoose.connect(process.env.DB_CONNECTION, { useNewUrlParser: true }, () =>
   console.log("mongoose activated")
 );
 
-app.listen(PORT, () => console.log(`Express server running on port: ${PORT}`));
+app.listen(port, () => console.log(`Express server running on port: ${port}`));
