@@ -13,6 +13,11 @@ router.post("/patient", async (req, res, next) => {
       allergies: req.body.allergies,
       habits: req.body.habits,
       dentalHistory: req.body.dentalHistory,
+      maritalStatus: req.body.maritalStatus,
+      profession: req.body.profession,
+      mobileNo: req.body.mobileNo,
+      bloodGroup: req.body.bloodGroup,
+      email: req.body.email,
     });
     res.send({
       message: "The record was created successfully!",
