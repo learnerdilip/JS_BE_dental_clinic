@@ -19,4 +19,13 @@ router.post("/indent", async (req, res, next) => {
   }
 });
 
+router.get("/indent", async (req, res, next) => {
+  try {
+    const indetList = await Indent.find();
+    res.send(indetList);
+  } catch {
+    (error) => console.error(error);
+  }
+});
+
 module.exports = router;

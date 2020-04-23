@@ -1,10 +1,10 @@
 const mongoose = require("mongoose");
 
 const ExpenseSchema = new mongoose.Schema({
-  type: { type: String },
-  date: { type: Date },
-  paidTo: { type: String },
-  amountDue: { type: Number },
+  type: { type: String, isNull: false, required: true },
+  date: { type: Date, isNull: false, required: true },
+  paidTo: { type: String, isNull: false, required: true },
+  amountDue: { type: Number, isNull: false, required: true },
   amountPaid: { type: Number },
   balAmount: { type: Number },
 });

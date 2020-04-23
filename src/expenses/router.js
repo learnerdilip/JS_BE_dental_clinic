@@ -19,4 +19,13 @@ router.post("/expense", async (req, res, next) => {
   }
 });
 
+router.get("/expense", async (req, res, next) => {
+  try {
+    const expenseList = await Expense.find();
+    res.send(expenseList);
+  } catch {
+    (error) => console.error(error);
+  }
+});
+
 module.exports = router;
