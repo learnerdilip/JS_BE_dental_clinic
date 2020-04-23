@@ -4,6 +4,7 @@ require("dotenv").config();
 const patientRouter = require("./src/patients/router");
 const toothworkRouter = require("./src/toothwork/router");
 const indentRouter = require("./src/indents/router");
+const expenseRouter = require("./src/expenses/router");
 
 const cors = require("cors");
 const app = express();
@@ -14,6 +15,7 @@ app.use(express.json());
 app.use(patientRouter);
 app.use(toothworkRouter);
 app.use(indentRouter);
+app.use(expenseRouter);
 
 // app.use("/", () => console.log("Home"));
 

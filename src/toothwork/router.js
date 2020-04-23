@@ -36,4 +36,14 @@ router.get("/toothwork", async (req, res, next) => {
   }
 });
 
+router.get("/lastmonthsale", async (req, res, next) => {
+  try {
+    const getdata = await Tooth.find({ workDate: new Date() });
+    console.log(getdata);
+    res.send(getdata);
+  } catch {
+    (error) => console.error(error);
+  }
+});
+
 module.exports = router;
