@@ -5,6 +5,7 @@ const patientRouter = require("./src/patients/router");
 const toothworkRouter = require("./src/toothwork/router");
 const indentRouter = require("./src/indents/router");
 const expenseRouter = require("./src/expenses/router");
+const labworkRouter = require("./src/labworks/router");
 
 const cors = require("cors");
 const app = express();
@@ -16,6 +17,7 @@ app.use(patientRouter);
 app.use(toothworkRouter);
 app.use(indentRouter);
 app.use(expenseRouter);
+app.use(labworkRouter);
 
 // app.use("/", () => console.log("Home"));
 
