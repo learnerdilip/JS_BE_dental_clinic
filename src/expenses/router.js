@@ -9,6 +9,7 @@ router.post("/expense", async (req, res, next) => {
       type: req.body.type,
       date: req.body.date,
       paidTo: req.body.paidTo,
+      paymentMode: req.body.paymentMode,
       amountDue: req.body.amountDue,
       amountPaid: req.body.amountPaid,
       balAmount: req.body.balAmount,

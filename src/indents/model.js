@@ -5,6 +5,7 @@ const IndentSchema = new mongoose.Schema({
   qytBought: { type: Number },
   purchaseDate: { type: Date },
   dealersName: { type: String },
+  paymentMode: { type: String },
   totalCost: { type: Number },
   paid: { type: Number },
   balance: { type: Number },

@@ -14,6 +14,7 @@ router.post("/toothwork", async (req, res, next) => {
       workDone: req.body.workDone,
       workDate: req.body.workDate,
       estimate: req.body.estimate,
+      paymentMode: req.body.paymentMode,
       received: req.body.received,
       balance: req.body.balance,
       recieptNo: req.body.recieptNo,

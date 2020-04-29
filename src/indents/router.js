@@ -9,6 +9,7 @@ router.post("/indent", async (req, res, next) => {
       qytBought: req.body.qytBought,
       purchaseDate: req.body.purchaseDate,
       dealersName: req.body.dealersName,
+      paymentMode: req.body.paymentMode,
       totalCost: req.body.totalCost,
       paid: req.body.paid,
       balance: req.body.balance,

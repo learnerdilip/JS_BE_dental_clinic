@@ -7,6 +7,7 @@ const labworkSchema = new mongoose.Schema({
   deliveryDate: { type: Date },
   itemSent: { type: String },
   itemReceived: { type: String },
+  paymentMode: { type: String },
   price: { type: Number },
 });
 

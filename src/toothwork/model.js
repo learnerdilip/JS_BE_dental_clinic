@@ -9,6 +9,7 @@ const toothWorkSchema = new mongoose.Schema({
   workDone: { type: String },
   workDate: { type: Date, required: true, allowNull: false },
   estimate: { type: Number },
+  paymentMode: { type: String },
   received: { type: Number },
   balance: { type: Number },
   recieptNo: { type: String },
