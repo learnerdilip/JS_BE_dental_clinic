@@ -4,20 +4,21 @@ const Tooth = require("./model");
 
 router.post("/toothwork", async (req, res, next) => {
   try {
-    // console.log("********", req.body);
+    console.log("********", req.body);
     const createtoothwork = await Tooth.create({
       patientId: req.body.patientId,
       VisitDate: req.body.VisitDate,
       toothNo: req.body.toothNo,
       diagnosis: req.body.diagnosis,
       treatmentPlan: req.body.treatmentPlan,
-      workDone: req.body.workDone,
-      workDate: req.body.workDate,
+      procedures: req.body.procedures,
+      nextVisitDate: req.body.workDate,
       estimate: req.body.estimate,
       paymentMode: req.body.paymentMode,
       received: req.body.received,
       balance: req.body.balance,
       recieptNo: req.body.recieptNo,
+      medicinePrescribed: req.body.medicinePrescribed,
     });
     res.send({
       message: "The record was created successfully!",

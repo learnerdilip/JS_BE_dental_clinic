@@ -6,13 +6,14 @@ const toothWorkSchema = new mongoose.Schema({
   toothNo: { type: Number, required: true, allowNull: false },
   diagnosis: { type: String },
   treatmentPlan: { type: String },
-  workDone: { type: String },
-  workDate: { type: Date, required: true, allowNull: false },
+  procedures: { type: String },
+  nextVisitDate: { type: Date },
   estimate: { type: Number },
   paymentMode: { type: String },
   received: { type: Number },
   balance: { type: Number },
   recieptNo: { type: String },
+  medicinePrescribed: { type: [String] },
 });
 
 module.exports = mongoose.model("toothwork", toothWorkSchema);
