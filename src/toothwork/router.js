@@ -4,7 +4,7 @@ const Tooth = require("./model");
 
 router.post("/toothwork", async (req, res, next) => {
   try {
-    console.log("********", req.body);
+    // console.log("********", req.body);
     const createtoothwork = await Tooth.create({
       patientId: req.body.patientId,
       VisitDate: req.body.VisitDate,
