@@ -2,7 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 require("dotenv").config();
 const patientRouter = require("./src/patients/router");
-const toothworkRouter = require("./src/toothwork/router");
+const patientVisitRouter = require("./src/patientvisit/router");
 const indentRouter = require("./src/indents/router");
 const expenseRouter = require("./src/expenses/router");
 const labworkRouter = require("./src/labworks/router");
@@ -14,7 +14,8 @@ const port = process.env.PORT || 4000;
 app.use(cors());
 app.use(express.json());
 app.use(patientRouter);
-app.use(toothworkRouter);
+app.use(patientVisitRouter);
+
 app.use(indentRouter);
 app.use(expenseRouter);
 app.use(labworkRouter);

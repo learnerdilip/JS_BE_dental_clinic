@@ -4,6 +4,7 @@ const Patient = require("./model");
 
 router.post("/patient", async (req, res, next) => {
   try {
+    console.log("***patient data from FE***", req.body);
     const createpatient = await Patient.create({
       name: req.body.name,
       gender: req.body.gender,
@@ -18,6 +19,7 @@ router.post("/patient", async (req, res, next) => {
       mobileNo: req.body.mobileNo,
       bloodGroup: req.body.bloodGroup,
       email: req.body.email,
+      appointmentDate: req.body.appointmentDate,
     });
     res.send({
       message: "The record was created successfully!",
