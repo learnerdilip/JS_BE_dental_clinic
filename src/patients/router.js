@@ -63,7 +63,7 @@ router.get("/patients", async (req, res, next) => {
     // console.log("***the patients list***", patientList);
     res.send(patientList);
   } catch {
-    (error) => console.error(error);
+    (error) => console.error(error.res);
   }
 });
 
