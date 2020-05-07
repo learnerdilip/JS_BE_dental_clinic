@@ -32,13 +32,13 @@ router.post("/patient", async (req, res, next) => {
 
 router.patch("/patient", async (req, res, next) => {
   try {
-    console.log("**REQ.body****", Object.entries(req.body));
+    // filtering the fields that need update
     const patientDetailUpdate = Object.entries(req.body)
       .filter((item) => item[1])
       .reduce((agg, item) => {
         return { ...agg, [item[0]]: item[1] };
       }, {});
-    console.log("*the filtered details ***", patientDetailUpdate);
+    // console.log("*the filtered details ***", patientDetailUpdate);
     const updatePatient = await Patient.update(
       { _id: patientDetailUpdate._id },
       patientDetailUpdate

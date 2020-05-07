@@ -1,10 +1,10 @@
 const mongoose = require("mongoose");
 
 const medicineSchema = new mongoose.Schema({
-  medicineName: { type: String },
-  medicineDosage: { type: String },
-  medicinedays: { type: Number },
-  medicineTimes: { type: String },
+  mediName: { type: String },
+  dosage: { type: String },
+  medicineTimesPerDay: { type: String },
+  mediDays: { type: String },
 });
 
 const toothWorkSchema = new mongoose.Schema({
