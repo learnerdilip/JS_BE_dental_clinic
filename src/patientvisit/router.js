@@ -4,7 +4,7 @@ const PatientVisit = require("./model");
 
 router.post("/patientvisit", async (req, res, next) => {
   try {
-    console.log("*********", req.body);
+    // console.log("*********", req.body);
     const assignToothData = [...req.body.toothData];
     const createPatientVisit = await PatientVisit.create({
       patientId: req.body.patientId,
@@ -17,7 +17,7 @@ router.post("/patientvisit", async (req, res, next) => {
       medicinePrescribed: [...req.body.medicinePrescribed],
       toothData: assignToothData,
     });
-    console.log(createPatientVisit);
+    // console.log(createPatientVisit);
     res.send(createPatientVisit);
   } catch {
     (error) => console.error(error);
@@ -29,7 +29,7 @@ router.get("/patientvisits", async (req, res, next) => {
     const patientvisitlist = await PatientVisit.find({
       patientId: req.query.patientid,
     });
-    console.log("*the response ready to send***", patientvisitlist);
+    // console.log("*the response ready to send***", patientvisitlist);
     res.send(patientvisitlist);
   } catch {
     (error) => console.error(error);

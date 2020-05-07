@@ -4,7 +4,7 @@ const Patient = require("./model");
 
 router.post("/patient", async (req, res, next) => {
   try {
-    console.log("***patient data from FE***", req.body);
+    // console.log("***patient data from FE***", req.body);
     const createpatient = await Patient.create({
       name: req.body.name,
       gender: req.body.gender,
@@ -32,25 +32,18 @@ router.post("/patient", async (req, res, next) => {
 
 router.patch("/patient", async (req, res, next) => {
   try {
-    //
+    console.log("**REQ.body****", Object.entries(req.body));
+    const patientDetailUpdate = Object.entries(req.body)
+      .filter((item) => item[1])
+      .reduce((agg, item) => {
+        return { ...agg, [item[0]]: item[1] };
+      }, {});
+    console.log("*the filtered details ***", patientDetailUpdate);
     const updatePatient = await Patient.update(
-      { _id: req.body._id },
-      {
-        name: req.body.name,
-        gender: req.body.gender,
-        dob: req.body.dob,
-        address: req.body.address,
-        medicalHistory: req.body.medicalHistory,
-        allergies: req.body.allergies,
-        habits: req.body.habits,
-        dentalHistory: req.body.dentalHistory,
-        maritalStatus: req.body.maritalStatus,
-        profession: req.body.profession,
-        mobileNo: req.body.mobileNo,
-        bloodGroup: req.body.bloodGroup,
-        email: req.body.email,
-      }
+      { _id: patientDetailUpdate._id },
+      patientDetailUpdate
     );
+
     res.send({ message: "successful updation" });
   } catch {
     (error) => console.error(error);
