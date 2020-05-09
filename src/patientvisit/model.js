@@ -26,6 +26,11 @@ const PatientVisitSchema = new mongoose.Schema({
   balance: { type: Number },
   medicinePrescribed: { type: [medicineSchema] },
   toothData: { type: [toothWorkSchema] },
+  chiefComplaint: { type: String },
+  oralExamination: { type: String },
+  investigation: { type: String },
+  treatmentPlan: { type: String },
+  advice: { type: String },
 });
 
 module.exports = mongoose.model("patientvisits", PatientVisitSchema);
