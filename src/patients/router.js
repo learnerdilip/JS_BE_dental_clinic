@@ -2,6 +2,11 @@ const { Router } = require("express");
 const router = new Router();
 const Patient = require("./model");
 
+const pdf = require("html-pdf");
+const pdfTemplate = require("../documents");
+
+const fs = require("fs");
+
 router.post("/patient", async (req, res, next) => {
   try {
     // console.log("***patient data from FE***", req.body);
@@ -58,6 +63,31 @@ router.get("/patients", async (req, res, next) => {
   } catch {
     (error) => console.error(error.res);
   }
+});
+
+router.post("/create-pdf", async (req, res, next) => {
+  try {
+    // console.log("***req.body**", req.body);
+    pdf
+      .create(pdfTemplate(req.body.item, req.body.patient), {})
+      .toFile("src/patients/result1.pdf", (err) => {
+        if (err) {
+          res.send(Promise.reject());
+        }
+        console.log("res");
+        res.send(Promise.resolve());
+      });
+  } catch {
+    (error) => console.error(error);
+  }
+});
+
+router.get("/fetch-pdf", async (req, res, next) => {
+  res.sendFile(`${__dirname}/result1.pdf`);
+});
+
+router.get("/delete-pdf", async (req, res, next) => {
+  fs.unlinkSync("src/patients/result1.pdf");
 });
 
 module.exports = router;
