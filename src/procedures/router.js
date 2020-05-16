@@ -16,7 +16,7 @@ router.post("/procedurework", async (req, res, next) => {
       note: req.body.note,
       toothimage: req.body.toothimage,
     });
-    console.log("---sending procedure---", createProcedureWork);
+    // console.log("---sending procedure---", createProcedureWork);
     res.send(createProcedureWork);
   } catch {
     (error) => next(error);
@@ -25,11 +25,11 @@ router.post("/procedurework", async (req, res, next) => {
 
 router.get("/procedurework", async (req, res, next) => {
   try {
-    console.log(req.query);
+    // console.log(req.query);
     const procedureList = await ProcedureWork.find({
       patientId: req.query.patientid,
     });
-    console.log(procedureList);
+    // console.log(procedureList);
     res.send(procedureList);
   } catch {
     (error) => next(error);
