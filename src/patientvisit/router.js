@@ -5,7 +5,7 @@ const PatientVisit = require("./model");
 router.post("/patientvisit", async (req, res, next) => {
   try {
     // console.log("*********", req.body);
-    const assignToothData = [...req.body.toothData];
+    // const assignToothData = [...req.body.toothData];
     const createPatientVisit = await PatientVisit.create({
       patientId: req.body.patientId,
       Visitdate: req.body.Visitdate,
@@ -15,7 +15,7 @@ router.post("/patientvisit", async (req, res, next) => {
       received: req.body.received,
       balance: req.body.balance,
       medicinePrescribed: [...req.body.medicinePrescribed],
-      toothData: assignToothData,
+      // toothData: assignToothData,
       chiefComplaint: req.body.chiefComplaint,
       oralExamination: req.body.oralExamination,
       investigation: req.body.investigation,

@@ -70,11 +70,10 @@ router.post("/create-pdf", async (req, res, next) => {
     // console.log("***req.body**", req.body);
     pdf
       .create(pdfTemplate(req.body.item, req.body.patient), {})
-      .toFile("src/patients/result1.pdf", (err) => {
+      .toFile("src/patients/temp.pdf", (err) => {
         if (err) {
           res.send(Promise.reject());
         }
-        console.log("res");
         res.send(Promise.resolve());
       });
   } catch {
@@ -83,11 +82,11 @@ router.post("/create-pdf", async (req, res, next) => {
 });
 
 router.get("/fetch-pdf", async (req, res, next) => {
-  res.sendFile(`${__dirname}/result1.pdf`);
+  res.sendFile(`${__dirname}/temp.pdf`);
 });
 
 router.get("/delete-pdf", async (req, res, next) => {
-  fs.unlinkSync("src/patients/result1.pdf");
+  fs.unlinkSync("src/patients/temp.pdf");
 });
 
 module.exports = router;
