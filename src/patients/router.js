@@ -2,10 +2,10 @@ const { Router } = require("express");
 const router = new Router();
 const Patient = require("./model");
 
-const pdf = require("html-pdf");
-const pdfTemplate = require("../documents");
+// const pdf = require("html-pdf");
+// const pdfTemplate = require("../documents");
 
-const fs = require("fs");
+// const fs = require("fs");
 
 router.post("/patient", async (req, res, next) => {
   try {
@@ -65,29 +65,28 @@ router.get("/patients", async (req, res, next) => {
   }
 });
 
-router.post("/create-pdf", async (req, res, next) => {
-  try {
-    // console.log("***req.body**", req.body);
-    pdf
-      .create(pdfTemplate(req.body.item, req.body.patient), {})
-      .toFile("src/patients/result1.pdf", (err) => {
-        if (err) {
-          res.send(Promise.reject());
-        }
-        console.log("res");
-        res.send(Promise.resolve());
-      });
-  } catch {
-    (error) => console.error(error);
-  }
-});
+// router.post("/create-pdf", async (req, res, next) => {
+//   try {
+//     // console.log("***req.body**", req.body);
+//     pdf
+//       .create(pdfTemplate(req.body.item, req.body.patient), {})
+//       .toFile("src/patients/temp.pdf", (err) => {
+//         if (err) {
+//           res.send(Promise.reject());
+//         }
+//         res.send(Promise.resolve());
+//       });
+//   } catch {
+//     (error) => console.error(error);
+//   }
+// });
 
-router.get("/fetch-pdf", async (req, res, next) => {
-  res.sendFile(`${__dirname}/result1.pdf`);
-});
+// router.get("/fetch-pdf", async (req, res, next) => {
+//   res.sendFile(`${__dirname}/temp.pdf`);
+// });
 
-router.get("/delete-pdf", async (req, res, next) => {
-  fs.unlinkSync("src/patients/result1.pdf");
-});
+// router.get("/delete-pdf", async (req, res, next) => {
+//   fs.unlinkSync("src/patients/temp.pdf");
+// });
 
 module.exports = router;
