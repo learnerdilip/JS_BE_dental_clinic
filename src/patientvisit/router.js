@@ -32,7 +32,7 @@ router.get("/patientvisits", async (req, res, next) => {
     const patientvisitlist = await PatientVisit.find({
       patientId: req.query.patientid,
     });
-    console.log("*the response for consultation list***", patientvisitlist);
+    // console.log("*the response for consultation list***", patientvisitlist);
     res.send(patientvisitlist);
   } catch {
     (error) => console.error(error);

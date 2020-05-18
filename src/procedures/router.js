@@ -36,4 +36,18 @@ router.get("/procedurework", async (req, res, next) => {
   }
 });
 
+router.patch("/procedure", async (req, res, next) => {
+  try {
+    const editProcedure = await ProcedureWork.update(
+      {
+        _id: req.body._id,
+      },
+      req.body
+    );
+    res.send(editProcedure);
+  } catch {
+    (error) => next(error);
+  }
+});
+
 module.exports = router;
