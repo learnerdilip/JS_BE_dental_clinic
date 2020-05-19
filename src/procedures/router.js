@@ -16,7 +16,7 @@ router.post("/procedurework", async (req, res, next) => {
       note: req.body.note,
       toothimage: req.body.toothimage,
     });
-    // console.log("---sending procedure---", createProcedureWork);
+    // console.log("--- procedure created---", createProcedureWork);
     res.send(createProcedureWork);
   } catch {
     (error) => next(error);
@@ -29,22 +29,33 @@ router.get("/procedurework", async (req, res, next) => {
     const procedureList = await ProcedureWork.find({
       patientId: req.query.patientid,
     });
-    // console.log(procedureList);
+    // console.log("procedureList---------", procedureList);
     res.send(procedureList);
   } catch {
     (error) => next(error);
   }
 });
 
-router.patch("/procedure", async (req, res, next) => {
+router.patch("/procedurework", async (req, res, next) => {
   try {
-    const editProcedure = await ProcedureWork.update(
+    const procedureFind = await ProcedureWork.findOne({
+      _id: req.query.procedureid,
+    });
+
+    const newProcedure = procedureFind.procedures.map((item) => {
+      if (item._id == req.body._id) {
+        return req.body;
+      } else {
+        return item;
+      }
+    });
+    // console.log("Changed?---------", newProcedure);
+    const updateProcedure = await ProcedureWork.update(
+      { _id: req.query.procedureid },
       {
-        _id: req.body._id,
-      },
-      req.body
+        procedures: [...newProcedure],
+      }
     );
-    res.send(editProcedure);
   } catch {
     (error) => next(error);
   }
