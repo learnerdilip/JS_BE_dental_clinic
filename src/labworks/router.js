@@ -21,7 +21,7 @@ router.post("/labwork", async (req, res, next) => {
       deliveryDate: req.body.deliveryDate,
       itemSent: req.body.itemSent,
       itemReceived: req.body.itemReceived,
-      paymentMode: req.body.paymentMode,
+      note: req.body.note,
       price: req.body.price,
     });
     res.send({
