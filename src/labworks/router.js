@@ -33,4 +33,19 @@ router.post("/labwork", async (req, res, next) => {
   }
 });
 
+router.patch("/labwork", async (req, res, next) => {
+  try {
+    // console.log("--the request ofr labwork edit---", req.body);
+    const tempLabwork = { ...req.body };
+    delete tempLabwork._id;
+    const updateLabwork = await Labwork.update(
+      { _id: req.body._id },
+      tempLabwork
+    );
+    res.send({ message: "successful updation" });
+  } catch {
+    (error) => console.error(error);
+  }
+});
+
 module.exports = router;
