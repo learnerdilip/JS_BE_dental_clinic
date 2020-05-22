@@ -16,6 +16,7 @@ router.post("/labwork", async (req, res, next) => {
   try {
     const createLabwork = await Labwork.create({
       labName: req.body.labName,
+      patientName: req.body.patientName,
       workType: req.body.workType,
       collectionDate: req.body.collectionDate,
       deliveryDate: req.body.deliveryDate,
