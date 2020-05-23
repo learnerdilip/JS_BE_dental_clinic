@@ -25,6 +25,7 @@ router.post("/patient", async (req, res, next) => {
       bloodGroup: req.body.bloodGroup,
       email: req.body.email,
       appointmentDate: req.body.appointmentDate,
+      appointmentProcedure: req.body.appointmentProcedure,
     });
     res.send({
       message: "The record was created successfully!",
@@ -48,7 +49,7 @@ router.patch("/patient", async (req, res, next) => {
       { _id: patientDetailUpdate._id },
       patientDetailUpdate
     );
-
+// 
     res.send({ message: "successful updation" });
   } catch {
     (error) => console.error(error);

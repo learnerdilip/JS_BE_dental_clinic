@@ -15,6 +15,7 @@ const PatientSchema = new mongoose.Schema({
   habits: { type: String },
   dentalHistory: { type: String },
   appointmentDate: { type: Date }, //new field
+  appointmentProcedure: { type: String },
 });
 
 module.exports = mongoose.model("patients", PatientSchema);
