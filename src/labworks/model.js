@@ -10,6 +10,7 @@ const labworkSchema = new mongoose.Schema({
   itemReceived: { type: String },
   note: { type: String },
   price: { type: Number },
+  status: { type: Boolean }, //status of payment
 });
 
 module.exports = mongoose.model("labwork", labworkSchema);

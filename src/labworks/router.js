@@ -24,6 +24,7 @@ router.post("/labwork", async (req, res, next) => {
       itemReceived: req.body.itemReceived,
       note: req.body.note,
       price: req.body.price,
+      status: req.body.status,
     });
     res.send({
       message: "The record was created successfully!",
