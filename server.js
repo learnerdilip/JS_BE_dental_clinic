@@ -3,10 +3,11 @@ const mongoose = require("mongoose");
 require("dotenv").config();
 const patientRouter = require("./src/patients/router");
 const patientVisitRouter = require("./src/patientvisit/router");
+const procedureRouter = require("./src/procedures/router");
 const indentRouter = require("./src/indents/router");
+const inventoryRouter = require("./src/inventory/router");
 const expenseRouter = require("./src/expenses/router");
 const labworkRouter = require("./src/labworks/router");
-const procedureRouter = require("./src/procedures/router");
 
 const cors = require("cors");
 const app = express();
@@ -18,6 +19,7 @@ app.use(patientRouter);
 app.use(patientVisitRouter);
 
 app.use(indentRouter);
+app.use(inventoryRouter);
 app.use(expenseRouter);
 app.use(labworkRouter);
 app.use(procedureRouter);
