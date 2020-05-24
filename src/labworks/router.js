@@ -50,4 +50,17 @@ router.patch("/labwork", async (req, res, next) => {
   }
 });
 
+router.post("/labworkdates", async (req, res, next) => {
+  try {
+    // console.log("----THE DATES REQUEST-----", req.body);
+    const starttonow = await Labwork.find({
+      collectionDate: { $gt: req.body.startDate, $lt: req.body.endDate },
+    });
+    res.send(starttonow);
+    // console.log(starttonow);
+  } catch {
+    (error) => console.error(error);
+  }
+});
+
 module.exports = router;
