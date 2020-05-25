@@ -1,14 +1,20 @@
 const mongoose = require("mongoose");
 
-const IndentSchema = new mongoose.Schema({
+const IndentItem = new mongoose.Schema({
   item: { type: String },
-  qytBought: { type: Number },
-  purchaseDate: { type: Date },
-  dealersName: { type: String },
-  paymentMode: { type: String },
-  totalCost: { type: Number },
-  paid: { type: Number },
-  balance: { type: Number },
+  quantity: { type: String },
+  dealerName: { type: String },
+  price: { type: Number },
+  itemStatus: { type: String },
 });
 
-module.exports = mongoose.model("indents", IndentSchema);
+const IndentSchema = new mongoose.Schema({
+  documentDate: { type: Date },
+  orderItems: { type: [IndentItem] },
+  billAmount: { type: Number },
+  paid: { type: Number },
+  balance: { type: Number },
+  paymentMode: { type: String },
+});
+
+module.exports = mongoose.model("indent", IndentSchema);
