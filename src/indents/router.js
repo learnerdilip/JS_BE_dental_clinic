@@ -4,7 +4,7 @@ const Indent = require("./model");
 
 router.post("/indent", async (req, res, next) => {
   try {
-    console.log("indents request:", req.body);
+    // console.log("indents request:", req.body);
     const saveIndent = await Indent.create(req.body);
     // console.log(saveIndent);
     res.send(saveIndent);
@@ -15,7 +15,7 @@ router.post("/indent", async (req, res, next) => {
 
 router.get("/indent", async (req, res, next) => {
   try {
-    const indentList = await Indent.find();
+    const indentList = await Indent.find().limit(10);
     // console.log("***********", indentList);
     res.send(indentList);
   } catch {

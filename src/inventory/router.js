@@ -28,7 +28,8 @@ router.patch("/inventory", async (req, res, next) => {
       { _id: req.body._id },
       req.body
     );
-    res.send({ updateInvenory, status: 200 });
+    const inventoryList = await Inventory.find();
+    res.send(inventoryList);
   } catch {
     (error) => console.error(error);
   }
