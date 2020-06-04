@@ -23,7 +23,12 @@ router.post("/inventory", async (req, res, next) => {
 
 router.patch("/inventory", async (req, res, next) => {
   try {
-    //
+    // console.log("-----the reqest body for Inv update----", req.body);
+    const updateInvenory = await Inventory.update(
+      { _id: req.body._id },
+      req.body
+    );
+    res.send({ updateInvenory, status: 200 });
   } catch {
     (error) => console.error(error);
   }

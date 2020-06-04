@@ -15,10 +15,13 @@ router.post("/indent", async (req, res, next) => {
 
 router.get("/indent", async (req, res, next) => {
   try {
-    const indetList = await Indent.find();
-    res.send(indetList);
+    const indentList = await Indent.find();
+    // console.log("***********", indentList);
+    res.send(indentList);
   } catch {
-    (error) => console.error(error);
+    (error) => {
+      return console.error(error);
+    };
   }
 });
 
