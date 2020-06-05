@@ -25,4 +25,16 @@ router.get("/indent", async (req, res, next) => {
   }
 });
 
+router.patch("/indent", async (req, res, next) => {
+  try {
+    console.log(req.body);
+    const updateIndent = await Indent.update({ _id: req.body._id }, req.body);
+    // console.log(updateIndent);
+  } catch {
+    (error) => {
+      return console.error(error);
+    };
+  }
+});
+
 module.exports = router;
