@@ -6,11 +6,12 @@ router.get("/inventory", async (req, res, next) => {
   try {
     const newDate = new Date("2021-01-01T00:00:00.000Z").getTime();
     console.log(new Date(newDate + 3600000 * 24 * 10));
-    const inventoryList = await Inventory.find({
-      inUseExpiry: new Date("2021-01-01"),
-    })
-      .sort({ inUseExpiry: -1 })
-      .limit(1);
+
+    const inventoryList = await Inventory.find()
+    //   inUseExpiry: new Date("2021-01-01"),
+    // })
+    //   .sort({ inUseExpiry: -1 })
+    //   .limit(10);
     res.send(inventoryList);
   } catch {
     (error) => console.error(error);

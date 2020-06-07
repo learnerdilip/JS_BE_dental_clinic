@@ -42,14 +42,14 @@ router.get("/procedurework", async (req, res, next) => {
 
 router.patch("/procedurework", async (req, res, next) => {
   try {
-    console.log("REQ.BODY------", req.body);
+    // console.log("REQ.BODY------", req.body);
 
     if (req.body.hasOwnProperty("status")) {
-      console.log("----procedure update initiated... --");
+      // console.log("----procedure update initiated... --");
       const procedureFind = await ProcedureWork.findOne({
         _id: req.query.procedureid,
       });
-      console.log("procedureFind", procedureFind);
+      // console.log("procedureFind", procedureFind);
 
       const newProcedure = procedureFind.procedures.map((item) => {
         if (item._id == req.body._id) {
@@ -58,7 +58,7 @@ router.patch("/procedurework", async (req, res, next) => {
           return item;
         }
       });
-      console.log("Changed?---------", newProcedure);
+      // console.log("Changed?---------", newProcedure);
       const updateProcedure = await ProcedureWork.update(
         { _id: req.query.procedureid },
         {
