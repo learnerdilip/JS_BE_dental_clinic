@@ -8,6 +8,11 @@ const ProcedureSchema = new mongoose.Schema({
   balanceAmount: { type: Number },
 });
 
+const PaymentSchema = new mongoose.Schema({
+  paymentDate: { type: Date, required: true, allowNull: false },
+  paymentAmount: { type: Number, required: true, allowNull: false },
+});
+
 const ProcedureWorkSchema = new mongoose.Schema({
   patientId: { type: String },
   procedureDate: { type: Date },
@@ -17,6 +22,10 @@ const ProcedureWorkSchema = new mongoose.Schema({
   procedures: { type: [ProcedureSchema] }, // multiple DD
   note: { type: String },
   toothimage: { type: String },
+  payments: { type: [PaymentSchema] },
+  totalPaid: { type: Number },
+  totalDue: { type: Number },
+  totalBalance: { type: Number },
 });
 
 module.exports = mongoose.model("procedureday", ProcedureWorkSchema);

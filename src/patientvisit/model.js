@@ -15,7 +15,7 @@ const oralExamSchema = new mongoose.Schema({
 const PatientVisitSchema = new mongoose.Schema({
   patientId: { type: String, required: true, allowNull: false },
   Visitdate: { type: Date, required: true, allowNull: false },
-  consultationCost: { type: Number },
+  consultationCost: { type: Number, required: true },
   paymentMode: { type: String },
   medicinePrescribed: { type: [medicineSchema] },
   chiefComplaint: { type: String },

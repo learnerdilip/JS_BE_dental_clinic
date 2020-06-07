@@ -9,6 +9,8 @@ const inventoryRouter = require("./src/inventory/router");
 const expenseRouter = require("./src/expenses/router");
 const labworkRouter = require("./src/labworks/router");
 
+const dashboardRouter = require("./src/dashboard");
+
 const cors = require("cors");
 const app = express();
 const port = process.env.PORT || 4000;
@@ -23,6 +25,8 @@ app.use(inventoryRouter);
 app.use(expenseRouter);
 app.use(labworkRouter);
 app.use(procedureRouter);
+
+app.use(dashboardRouter);
 
 // app.use("/", () => console.log("Home"));
 

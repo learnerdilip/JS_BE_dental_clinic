@@ -15,6 +15,10 @@ router.post("/procedurework", async (req, res, next) => {
       procedureCost: req.body.procedureCost,
       note: req.body.note,
       toothimage: req.body.toothimage,
+      payments: [...req.body.payments],
+      totalPaid: req.body.totalPaid,
+      totalDue: req.body.totalDue,
+      totalBalance: req.body.totalBalance,
     });
     // console.log("--- procedure created---", createProcedureWork);
     res.send(createProcedureWork);
@@ -38,24 +42,33 @@ router.get("/procedurework", async (req, res, next) => {
 
 router.patch("/procedurework", async (req, res, next) => {
   try {
+    console.log(req.body);
     const procedureFind = await ProcedureWork.findOne({
       _id: req.query.procedureid,
     });
 
-    const newProcedure = procedureFind.procedures.map((item) => {
-      if (item._id == req.body._id) {
-        return req.body;
-      } else {
-        return item;
-      }
-    });
-    // console.log("Changed?---------", newProcedure);
-    const updateProcedure = await ProcedureWork.update(
-      { _id: req.query.procedureid },
-      {
-        procedures: [...newProcedure],
-      }
-    );
+    // for updating the PAYMENT
+    if (req.body[0].hasOwnProperty("paymentDate")) {
+      const updateProcedure = await ProcedureWork.update(
+        { _id: req.query.procedureid },
+        { payments: [...req.body] }
+      );
+    } else {
+      const newProcedure = procedureFind.procedures.map((item) => {
+        if (item._id == req.body._id) {
+          return req.body;
+        } else {
+          return item;
+        }
+      });
+      // console.log("Changed?---------", newProcedure);
+      const updateProcedure = await ProcedureWork.update(
+        { _id: req.query.procedureid },
+        {
+          procedures: [...newProcedure],
+        }
+      );
+    }
   } catch {
     (error) => next(error);
   }
