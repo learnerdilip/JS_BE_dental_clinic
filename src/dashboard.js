@@ -19,44 +19,43 @@ router.get("/finance", async (req, res, next) => {
     const procedurePay = await Procedure.find({
       "payments.paymentDate": { $lte: t0, $gte: t10 },
     });
-    const paymentList = procedurePay
+    const procedureFin = procedurePay
       .map((item) => item.payments)
       .reduce((sum, item) => {
         return [...sum, ...item];
       }, []);
-    // res.send(paymentList);
+    // res.send(procedureFin);
 
     // (3) Lab work (delivery date, amount, item)
     const labworkFind = await Labwork.find();
-    const labsData = labworkFind.map((item) => ({
+    const labworkFin = labworkFind.map((item) => ({
       reason: item.labName,
       amount: item.price,
       date: item.paymentDate,
     }));
-    // res.send(labsData);
+    // res.send(labworkFin);
 
     // (2) Indent (amount, OrderDate, dealer)
     const indentPayments = await Indent.find({ paid: { $gt: 0 } });
-    const indentpaid = indentPayments.map((item) => ({
+    const indentFin = indentPayments.map((item) => ({
       reason: item.dealer,
       amount: item.paid,
       date: item.paymentDate,
     }));
-    // res.send(indentpaid);
+    // res.send(indentFin);
 
     // (1) patient consultation list (visitDate, amount, patientName)
     const consultPayList = await PatientVisit.find({
       Visitdate: { $lte: t0, $gte: t10 },
     });
-    console.log(consultPayList);
-    const visitfeelist = consultPayList.map((item) => {
+    const visitFin = consultPayList.map((item) => {
       return {
         date: item.Visitdate,
         amount: item.consultationCost,
-        reason: item.patientId,
+        reason: "Patient visit",
       };
     });
-    // res.send(visitfeelist);
+    // res.send(visitFin);
 
     // (4) expense (reason, amount, type)
     const expensePay = await Expense.find({ date: { $lte: t0, $gte: t10 } });
@@ -66,6 +65,24 @@ router.get("/finance", async (req, res, next) => {
       date: item.date,
     }));
     // res.send(expenseFin);
+    const ExpensesArr = [
+      ...expenseFin,
+      ...indentFin,
+      ...labworkFin,
+      ...procedureFin,
+      ...visitFin,
+    ].reduce((agg, ele) => {
+      const dated = ele.date || ele.paymentDate;
+      let millis = dated.setHours(0, 0, 0, 0);
+      let aggKeys = Object.keys(agg);
+      if (aggKeys.includes(`${millis}`)) {
+        return { ...agg, [`${millis}`]: [...agg[`${millis}`], ele] };
+      } else {
+        return { ...agg, [millis]: [ele] };
+      }
+    }, {});
+
+    res.send(ExpensesArr);
   } catch {
     (error) => console.error(error);
   }
