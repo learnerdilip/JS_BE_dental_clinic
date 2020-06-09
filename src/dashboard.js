@@ -81,8 +81,16 @@ router.get("/finance", async (req, res, next) => {
         return { ...agg, [millis]: [ele] };
       }
     }, {});
+    // console.log(Object.entries(ExpensesArr));
+    const convertedArr = Object.entries(ExpensesArr).map((item) => {
+      // let temp = new Date(parseInt(item[0]));
+      let temp = new Date(parseInt(item[0]));
+      console.log(temp, item[1]);
+      return { temp: item[1] };
+      // return { [temp]: item[1] };
+    });
 
-    res.send(ExpensesArr);
+    res.send(convertedArr);
   } catch {
     (error) => console.error(error);
   }
