@@ -8,9 +8,10 @@ const labworkSchema = new mongoose.Schema({
   deliveryDate: { type: Date },
   itemSent: { type: String },
   itemReceived: { type: String },
-  note: { type: String },
   price: { type: Number },
   status: { type: Boolean }, //status of payment
+  note: { type: String },
+  paymentDate: { type: Date },
 });
 
 module.exports = mongoose.model("labwork", labworkSchema);

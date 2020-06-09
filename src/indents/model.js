@@ -16,6 +16,7 @@ const IndentSchema = new mongoose.Schema({
   balance: { type: Number, default: 0 },
   paymentMode: { type: String },
   orderItems: { type: [OrderItem] },
+  paymentDate: { type: Date },
 });
 
 module.exports = mongoose.model("indent", IndentSchema);

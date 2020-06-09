@@ -5,9 +5,9 @@ const ExpenseSchema = new mongoose.Schema({
   date: { type: Date, isNull: false, required: true },
   paidTo: { type: String, isNull: false, required: true },
   paymentMode: { type: String },
-  amountDue: { type: Number, isNull: false, required: true },
   amountPaid: { type: Number },
-  balAmount: { type: Number },
+  // amountDue: { type: Number, isNull: false, required: true },
+  // balAmount: { type: Number },
 });
 
 module.exports = mongoose.model("expenses", ExpenseSchema);
