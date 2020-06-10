@@ -84,9 +84,9 @@ router.get("/finance", async (req, res, next) => {
     // console.log(Object.entries(ExpensesArr));
     const convertedArr = Object.entries(ExpensesArr).map((item) => {
       // let temp = new Date(parseInt(item[0]));
-      let temp = new Date(parseInt(item[0]));
-      console.log(temp, item[1]);
-      return { temp: item[1] };
+      let temp = new Date(parseInt(item[0])).toDateString();
+      // console.log(temp, item[1]);
+      return { finDay: { date: temp, dateItems: item[1] } };
       // return { [temp]: item[1] };
     });
 
