@@ -20,7 +20,7 @@ router.post("/expense", async (req, res, next) => {
 
 router.get("/expense", async (req, res, next) => {
   try {
-    const expenseList = await Expense.find();
+    const expenseList = await Expense.find().sort({ date: -1 }).limit(20);
     res.send(expenseList);
   } catch {
     (error) => console.error(error);

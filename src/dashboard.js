@@ -13,7 +13,8 @@ router.get("/finance", async (req, res, next) => {
     const nowmilli = new Date(t0).getTime();
     const days = 10; //by default for last 10 days
     const t10 = new Date(nowmilli - 3600000 * 24 * days);
-    console.log("now & -10 days:", t0, t10);
+    console.log(">>>>>>>>>>> t1, t10<<<<<<<<<", t0, t10);
+    console.log("d1 %%%%%%%%%%%% d2", req.query.d1, req.query.d2);
 
     // (0) procedures list (paymentDate, amount, reason - patientId)
     const procedurePay = await Procedure.find({

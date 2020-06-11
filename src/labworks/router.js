@@ -5,7 +5,6 @@ const Labwork = require("./model");
 router.get("/labwork", async (req, res, next) => {
   try {
     const labworkList = await Labwork.find();
-    // console.log(labworkList);
     res.send(labworkList);
   } catch {
     (error) => console.error(error);
