@@ -9,12 +9,14 @@ const Expense = require("./expenses/model");
 
 router.get("/finance", async (req, res, next) => {
   try {
-    const t0 = new Date();
-    const nowmilli = new Date(t0).getTime();
-    const days = 10; //by default for last 10 days
-    const t10 = new Date(nowmilli - 3600000 * 24 * days);
-    console.log(">>>>>>>>>>> t1, t10<<<<<<<<<", t0, t10);
-    console.log("d1 %%%%%%%%%%%% d2", req.query.d1, req.query.d2);
+    const t0 = new Date(req.query.d2);
+    const t10 = new Date(req.query.d1);
+    // const t0 = new Date();
+    // const nowmilli = new Date(t0).getTime();
+    // const days = 10; //by default for last 10 days
+    // const t10 = new Date(nowmilli - 3600000 * 24 * days);
+    // console.log("t0 t10", t0, t10);
+    // console.log("d1 d2", new Date(req.query.d1), new Date(req.query.d2));
 
     // (0) procedures list (paymentDate, amount, reason - patientId)
     const procedurePay = await Procedure.find({
@@ -28,7 +30,9 @@ router.get("/finance", async (req, res, next) => {
     // res.send(procedureFin);
 
     // (3) Lab work (delivery date, amount, item)
-    const labworkFind = await Labwork.find();
+    const labworkFind = await Labwork.find({
+      paymentDate: { $lte: t0, $gte: t10 },
+    });
     const labworkFin = labworkFind.map((item) => ({
       reason: item.labName,
       amount: item.price,
@@ -37,7 +41,10 @@ router.get("/finance", async (req, res, next) => {
     // res.send(labworkFin);
 
     // (2) Indent (amount, OrderDate, dealer)
-    const indentPayments = await Indent.find({ paid: { $gt: 0 } });
+    const indentPayments = await Indent.find({
+      paid: { $gt: 0 },
+      paymentDate: { $lte: t0, $gte: t10 },
+    });
     const indentFin = indentPayments.map((item) => ({
       reason: item.dealer,
       amount: item.paid,
@@ -66,6 +73,8 @@ router.get("/finance", async (req, res, next) => {
       date: item.date,
     }));
     // res.send(expenseFin);
+
+    // combining all together
     const ExpensesArr = [
       ...expenseFin,
       ...indentFin,
@@ -82,15 +91,16 @@ router.get("/finance", async (req, res, next) => {
         return { ...agg, [millis]: [ele] };
       }
     }, {});
-    // console.log(Object.entries(ExpensesArr));
-    const convertedArr = Object.entries(ExpensesArr).map((item) => {
-      // let temp = new Date(parseInt(item[0]));
-      let temp = new Date(parseInt(item[0])).toDateString();
-      // console.log(temp, item[1]);
-      return { finDay: { date: temp, dateItems: item[1] } };
-      // return { [temp]: item[1] };
-    });
 
+    const convertedArr = Object.entries(ExpensesArr)
+      .map((item) => {
+        let temp = new Date(parseInt(item[0])).toDateString();
+        return { finDay: { date: temp, dateItems: item[1] } };
+      })
+      .sort(
+        (b, a) =>
+          new Date(a.finDay.date).getTime() - new Date(b.finDay.date).getTime()
+      );
     res.send(convertedArr);
   } catch {
     (error) => console.error(error);
