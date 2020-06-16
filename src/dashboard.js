@@ -29,12 +29,25 @@ router.get("/finance", async (req, res, next) => {
       }, []);
     // res.send(procedureFin);
 
+    // (1) patient consultation list (visitDate, amount, patientName)
+    const consultPayList = await PatientVisit.find({
+      Visitdate: { $lte: t0, $gte: t10 },
+    });
+    const visitFin = consultPayList.map((item) => {
+      return {
+        date: item.Visitdate,
+        amount: item.consultationCost,
+        reason: "Patient visit",
+      };
+    });
+    // res.send(visitFin);
+
     // (3) Lab work (delivery date, amount, item)
     const labworkFind = await Labwork.find({
       paymentDate: { $lte: t0, $gte: t10 },
     });
     const labworkFin = labworkFind.map((item) => ({
-      reason: item.labName,
+      reason: `${item.workType} - Labwork`,
       amount: item.price,
       date: item.paymentDate,
     }));
@@ -52,23 +65,10 @@ router.get("/finance", async (req, res, next) => {
     }));
     // res.send(indentFin);
 
-    // (1) patient consultation list (visitDate, amount, patientName)
-    const consultPayList = await PatientVisit.find({
-      Visitdate: { $lte: t0, $gte: t10 },
-    });
-    const visitFin = consultPayList.map((item) => {
-      return {
-        date: item.Visitdate,
-        amount: item.consultationCost,
-        reason: "Patient visit",
-      };
-    });
-    // res.send(visitFin);
-
     // (4) expense (reason, amount, type)
     const expensePay = await Expense.find({ date: { $lte: t0, $gte: t10 } });
     const expenseFin = expensePay.map((item) => ({
-      reason: item.type,
+      reason: `${item.type} - Expense`,
       amount: item.amountPaid,
       date: item.date,
     }));
