@@ -49,7 +49,7 @@ router.patch("/patient", async (req, res, next) => {
       { _id: patientDetailUpdate._id },
       patientDetailUpdate
     );
-// 
+    //
     res.send({ message: "successful updation" });
   } catch {
     (error) => console.error(error);
@@ -61,6 +61,25 @@ router.get("/patients", async (req, res, next) => {
     const patientList = await Patient.find();
     // console.log("***the patients list***", patientList);
     res.send(patientList);
+  } catch {
+    (error) => console.error(error.res);
+  }
+});
+
+router.get("/patientFind", async (req, res, next) => {
+  try {
+    // console.log(req.query);
+    const patientList = await Patient.find({
+      name: { $regex: `${req.query.q}`, $options: "i" },
+    });
+
+    res.send(
+      patientList.map((item) => ({
+        name: item.name,
+        mobile: item.mobileNo,
+        email: item.email,
+      }))
+    );
   } catch {
     (error) => console.error(error.res);
   }
