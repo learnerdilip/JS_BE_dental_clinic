@@ -7,6 +7,9 @@ const PatientVisit = require("./patientvisit/model");
 const Procedure = require("./procedures/model");
 const Expense = require("./expenses/model");
 
+var multer = require("multer");
+var upload = multer({ dest: "uploads/" });
+
 router.get("/finance", async (req, res, next) => {
   try {
     const t0 = new Date(req.query.d2);
@@ -106,5 +109,19 @@ router.get("/finance", async (req, res, next) => {
     (error) => console.error(error);
   }
 });
+
+
+// fileuploads
+router.post(
+  "/patientupload",
+  upload.single("patients"),
+  async (req, res, next) => {
+    try {
+      console.log(req.file);
+    } catch {
+      (error) => console.error(error);
+    }
+  }
+);
 
 module.exports = router;
