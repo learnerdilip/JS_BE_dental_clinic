@@ -8,7 +8,9 @@ const Procedure = require("./procedures/model");
 const Expense = require("./expenses/model");
 
 var multer = require("multer");
-var upload = multer({ dest: "uploads/" });
+var upload = multer({ dest: "src/" });
+
+const CSVToJSON = require("csvtojson");
 
 router.get("/finance", async (req, res, next) => {
   try {
@@ -110,7 +112,6 @@ router.get("/finance", async (req, res, next) => {
   }
 });
 
-
 // fileuploads
 router.post(
   "/patientupload",
@@ -118,6 +119,14 @@ router.post(
   async (req, res, next) => {
     try {
       console.log(req.file);
+      CSVToJSON()
+        .fromFile(`${__dirname}/patient`)
+        .then((users) => {
+          console.log(users);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     } catch {
       (error) => console.error(error);
     }
