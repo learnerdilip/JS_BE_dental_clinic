@@ -6,11 +6,13 @@ const Labwork = require("./labworks/model");
 const PatientVisit = require("./patientvisit/model");
 const Procedure = require("./procedures/model");
 const Expense = require("./expenses/model");
+const Patients = require("./patients/model");
 
 var multer = require("multer");
 var upload = multer({ dest: "src/" });
 
 const CSVToJSON = require("csvtojson");
+const { json } = require("body-parser");
 
 router.get("/finance", async (req, res, next) => {
   try {
@@ -118,15 +120,11 @@ router.post(
   upload.single("patients"),
   async (req, res, next) => {
     try {
-      console.log(req.file);
-      CSVToJSON()
-        .fromFile(`${__dirname}/patient`)
-        .then((users) => {
-          console.log(users);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      // console.log(req.file);
+      const jsonArr = await CSVToJSON().fromFile(`${__dirname}/patient`);
+      console.log(jsonArr);
+      const promiseArr = jsonArr.map((item) => Patients.create(item));
+      Promise.all(promiseArr).then((items) => console.log(items));
     } catch {
       (error) => console.error(error);
     }
